@@ -8,9 +8,11 @@
 {% block body_class %} about-us {% endblock body_class %}
 
 {% block content %}
-
-  {% include "includes/navigation-transparent.html" %}
-
+  {% if current_user.is_authenticated %}
+    {% include "includes/navigation-authenticated.html" %}
+  {% else %}
+    {% include "includes/navigation-not-authenticated.html" %}
+  {% endif %}
   <!-- End Navbar -->
   <!-- -------- START HEADER 7 w/ text and video ------- -->
   <header class="bg-gradient-dark">

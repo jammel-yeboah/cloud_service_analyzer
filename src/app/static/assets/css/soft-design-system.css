@@ -332,7 +332,9 @@ legend {
 [type="search"] {
   outline-offset: -2px;
   -webkit-appearance: textfield; }
-
+ #auth-img {
+  background: transparent;
+ }
 /* rtl:raw:
 [type="tel"],
 [type="url"],
