@@ -19,8 +19,11 @@
   {{ form.type }}
   <input type="submit">
 </form>
+{% endblock content %}
 
 
+
+{% block javascripts %}
 <script>
   let category_select= document.getElementById('category');
   let type_select= document.getElementById('type')
@@ -39,4 +42,4 @@
     });
   }
 </script>
-{% endblock content %}
+{% endblock javascripts %}
