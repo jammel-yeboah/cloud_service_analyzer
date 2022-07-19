@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} About US {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} about-us {% endblock body_class %}
+
+{% block content %}
+  {% if current_user.is_authenticated %}
+    {% include "includes/navigation-authenticated.html" %}
+  {% else %}
+    {% include "includes/navigation-not-authenticated.html" %}
+  {% endif %}
+<form method= "POST">
+  {{ form.csrf_token }}
+  {{ form.category }}
+  {{ form.type }}
+  <input type="submit">
+</form>
+
+
+<script>
+  let category_select= document.getElementById('category');
+  let type_select= document.getElementById('type')
+
+  category_select.onchange= function() {
+    category= category_select.value;
+
+    fetch('/service_types/' + category).then(function(response) {
+      response.json().then(function(data) {
+        let optionHTML= "";
+        for (let type of data.service_types) {
+          optionHTML += '<option value="' + type.id + '">' + type.name + '</option>';
+        }
+        type_select.innerHTML= optionHTML;
+      });
+    });
+  }
+</script>
+{% endblock content %}

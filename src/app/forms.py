@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 
-
+from random import choices
 from flask_wtf          import FlaskForm
 from flask_wtf.file     import FileField, FileRequired
-from wtforms            import StringField, TextAreaField, SubmitField, PasswordField
+from wtforms            import StringField, TextAreaField, SubmitField, PasswordField, SelectField
 from wtforms.validators import InputRequired, Email, DataRequired
 
 class LoginForm(FlaskForm):
@@ -15,3 +15,7 @@ class RegisterForm(FlaskForm):
 	username    = StringField  (u'Username'  , validators=[DataRequired()])
 	password    = PasswordField(u'Password'  , validators=[DataRequired()])
 	email       = StringField  (u'Email'     , validators=[DataRequired(), Email()])
+
+class cloudForm(FlaskForm):
+    category= SelectField('category', choices=[])
+    type= SelectField('type', choices=[])
