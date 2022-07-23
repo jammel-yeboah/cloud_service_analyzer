@@ -1916,6 +1916,21 @@ textarea.form-control-lg {
     opacity: 0.65;
     transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
 
+#faq, #cloud_form, #resultsTable {
+  max-width: 80%;
+  margin: auto;
+  padding-top:100px;
+}
+#resultsTable {
+  max-width: 90%;
+}
+#cloud_form_page {
+  background-image: linear-gradient(#206ad8, white)
+}
+#results-page {
+  background-image: linear-gradient(to bottom right, #206ad8, white)
+}
+
 .input-group {
   position: relative;
   display: flex;

@@ -6,18 +6,22 @@ import os
 import pandas as pd
 
 # Flask modules
-from flask               import jsonify, render_template, request, url_for, redirect, send_from_directory
+from flask               import jsonify, render_template, request, url_for, redirect, send_from_directory, flash
 from requests import session
 from flask_login         import login_user, logout_user, current_user, login_required
 from werkzeug.exceptions import HTTPException, NotFound, abort
 from jinja2              import TemplateNotFound
 from flask               import session
+from flask_bootstrap     import Bootstrap
 
 # App modules
 from app        import app, lm, db, bc
 from app.models import Users
 from app.forms  import LoginForm, RegisterForm, cloudForm
-from app.apis import gcp, aws, azure
+from app.apis import gcp, aws, azure, cloud_map
+
+Bootstrap(app)
+
 # provide login manager with load_user callback
 @lm.user_loader
 def load_user(user_id):
@@ -123,39 +127,17 @@ def sitemap():
 def cloud_form():
     form= cloudForm()
     if request.method == 'GET':
-        filter= filter_options()
+        filter= cloud_map.filter_options()
         form.category.choices= filter.get_categories()
         form.type.choices= filter.get_service_type()
         return render_template('cloud_form.html', form=form)
-    session['cloud_form_data']= {'category':form.category.data,'type': form.type.data,'region': form.region.data}
-    return redirect(url_for('display_results'))
-
-class filter_options:
-    def __init__(self):
-        self.df= pd.read_excel("apis/cmap_sheet.xlsx", "Sheet1")
-
-    def get_categories(self): #returns a list of cloud categories to be listed on select menu on forms page
-        items= self.df['Service_category'].unique()
-        results= [(item, item) for item in items] ##flask wtf requires tuples of data and id
-        return results
-
-    def get_service_type(self, category=None):
-        if category is None: items= self.df['Service_type'].unique()
-        else: items= self.df.loc[self.df['Service_category'] == category, 'Service_type'].unique()
-        results= [(item, item) for item in items] ##flask wtf requires tuples of data and id
-        return results
-
-    def get_products(self, category, type):
-        res= (self.df.query('Service_category== @category and Service_type== @type')).to_dict('list')
-        products= {'gcp': res['gcp_offering'][0].split(',')[0],
-                    'aws': res['aws_offering'][0].split(',')[0],
-                    'azure': res['azure_offering'][0].split(',')[0]}
-        return products
-
+    else:
+        session['cloud_form_data']= {'category':form.category.data,'type': form.type.data,'region': form.region.data}
+        return redirect(url_for('display_results'))
 
 @app.route('/service_types/<category>')
 def service_types(category):
-    filter= filter_options()
+    filter= cloud_map.filter_options()
     service_types= filter.get_service_type(category)
     service_typeArr= []
 
@@ -170,9 +152,19 @@ def service_types(category):
 def display_results():
     form_data= session.get('cloud_form_data')
     region= form_data['region']
-    filter= filter_options()
+    filter= cloud_map.filter_options()
     products= filter.get_products(form_data['category'], form_data['type'])
     gcp_res= gcp.get_gcp_info(products['gcp'])
     aws_res= aws.get_aws_info(products['aws'], region)
     azure_res= azure.get_azure_info(products['azure'], region, form_data['category']) #azure uses identical category namings so adding category will make api query faster
     return render_template('display_results.html', gcp_res=gcp_res, aws_res=aws_res, azure_res=azure_res)
+
+@app.route('/reports.html')
+def reports():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    return render_template('reports.html')
+
+@app.route('/more_info.html')
+def more_info():
+    return render_template('more_info.html')

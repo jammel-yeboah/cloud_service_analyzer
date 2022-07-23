@@ -17,9 +17,9 @@ class RegisterForm(FlaskForm):
 	email       = StringField  (u'Email'     , validators=[DataRequired(), Email()])
 
 class cloudForm(FlaskForm):
-    category= SelectField('category', choices=[])
-    type= SelectField('type', choices=[])
-    region= SelectField('region', choices=[
+    category= SelectField('Category', choices=[], default=0)
+    type= SelectField('Type', choices=[])
+    region= SelectField('Region', choices=[
 						("eastus","(US) East US"),
 						("eastus2","(US) East US 2"),
 						("southcentralus","(US) South Central US"),
@@ -95,4 +95,4 @@ class cloudForm(FlaskForm):
 						("ukwest","(Europe) UK West"),
 						("uaecentral","(Middle East) UAE Central"),
 						("brazilsoutheast","(South America) Brazil Southeast")])
-    recaptcha = RecaptchaField()
+    #recaptcha = RecaptchaField()

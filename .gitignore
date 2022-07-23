@@ -12,4 +12,5 @@ bin
 flask
 lib
 include
-src/app/apis/aws.py
+src/app/apis/cp-calc-1-json-key.json
+*.env

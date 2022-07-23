@@ -3,7 +3,9 @@
 {% block title %} About US {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock stylesheets %}
 
 {% block body_class %} about-us {% endblock body_class %}
 
@@ -13,46 +15,50 @@
   {% else %}
     {% include "includes/navigation-not-authenticated.html" %}
   {% endif %}
-<table>
+<div id="results-page">
+<div id="resultsTable">
+<table class="table table-bordered text-white">
   <thead>
     <tr>
-      <th>-</th>
-      <th>Google Cloud Platform</th>
-      <th>Amazon Web Services</th>
-      <th>Microsoft Azure</th>
+      <th scope="col"></th>
+      <th scope="col">Google Cloud Platform</th>
+      <th scope="col">Amazon Web Services</th>
+      <th scope="col">Microsoft Azure</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Name</td>
+      <th scope="col">Name</th>
       <td>{{ gcp_res['Name'] if gcp_res is not none else 'No Results' }}</td>
       <td>{{ aws_res['Name'] if aws_res is not none else 'No Results' }}</td>
       <td>{{ azure_res['Name'] if azure_res is not none else 'No Results'}}</td>
     </tr>
     <tr>
-      <td>Usage Type</td>
+      <th scope="col">Usage Type</th>
       <td>{{ gcp_res['Usage Type'] if gcp_res is not none else 'No Results' }}</td>
       <td>{{ aws_res['Usage Type'] if aws_res is not none else 'No Results' }}</td>
       <td>{{ azure_res['Usage Type'] if azure_res is not none else 'No Results' }}</td>
     </tr>
     <tr>
-      <td>service Regions</td>
+      <th scope="col">Service Regions</th>
       <td>{{ gcp_res['Service Regions'] if gcp_res is not none else 'No Results' }}</td>
       <td>{{ aws_res['Service Regions'] if aws_res is not none else 'No Results' }}</td>
       <td>{{ azure_res['Service Regions'] if azure_res is not none else 'No Results' }}</td>
     </tr>
     <tr>
-      <td>SKU ID</td>
+      <th scope="col">SKU ID</th>
       <td>{{ gcp_res['SKU ID'] if gcp_res is not none else 'No Results' }}</td>
       <td>{{ aws_res['SKU ID'] if aws_res is not none else 'No Results' }}</td>
       <td>{{ azure_res['SKU ID'] if azure_res is not none else 'No Results' }}</td>
     </tr>
     <tr>
-      <td>Price Description</td>
+      <th scope="col">Price Description</th>
       <td>{{ gcp_res['Price Description'] if gcp_res is not none else 'No Results' }}</td>
-      <td>{{ aws_res['Price Description'] }if aws_res is not none else 'No Results' }</td>
+      <td>{{ aws_res['Price Description'] if aws_res is not none else 'No Results' }}</td>
       <td>{{ azure_res['Price Description'] if azure_res is not none else 'No Results' }}</td>
     </tr>
     </tbody>
 </table>
+</div>
+</div>
 {% endblock content %}

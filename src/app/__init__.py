@@ -27,4 +27,4 @@ def initialize_database():
 
 # Import routing, models and Start the App
 from app import views, models
-from app.apis import gcp
+from app.apis import gcp, aws, azure, cloud_map

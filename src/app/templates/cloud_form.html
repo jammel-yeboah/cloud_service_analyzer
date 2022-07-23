@@ -1,4 +1,5 @@
 {% extends 'layouts/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %} About US {% endblock title %}
 
@@ -13,13 +14,24 @@
   {% else %}
     {% include "includes/navigation-not-authenticated.html" %}
   {% endif %}
-<form method= "POST">
-  {{ form.csrf_token }}
-  {{ form.category }}
-  {{ form.type }}
-  {{ form.region }}
-  <input type="submit">
-</form>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for msg in messages %}
+        <p>{{ msg }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+<div id="cloud_form_page">
+<div class="container" id="cloud_form">
+  <form method= "POST">
+    {{ form.csrf_token }}
+    {{ wtf.form_field(form.category, placeholder='Service Category') }}
+    {{ wtf.form_field(form.type, placeholder='Service Type') }}
+    {{ wtf.form_field(form.region, placeholder='Service Region') }}
+    <input class="btn btn-info" type="submit">
+  </form>
+</div>
+</div>
 {% endblock content %}
 
 
@@ -44,3 +56,9 @@
   }
 </script>
 {% endblock javascripts %}
+
+
+{{ form.csrf_token }}
+    {{ form.category }}
+    {{ form.type }}
+    {{ form.region }}

@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} About US {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} about-us {% endblock body_class %}
+
+{% block content %}
+  {% if current_user.is_authenticated %}
+    {% include "includes/navigation-authenticated.html" %}
+  {% else %}
+    {% include "includes/navigation-not-authenticated.html" %}
+  {% endif %}
+
+
+
+{% endblock content %}

@@ -5,16 +5,10 @@ import os
 import json
 import requests
 import jellyfish
-"""2nd thought
-display form asking user for category, example: networking
-then ask user to select category descriptions, example app moderization (gotten from google compare aws and azure services)
-then get aws, azure and gcp services for given descirption(search map) AND send api request for each service
-display 1st service region, sku_id and description for each service
-calculate and display price for each service
-diplay pricing difference of for aws, gcp, and azure"""
+from decouple import config
 
-
-API_KEY= "AIzaSyBMgjO1cJZQVlqqyDoo2tOFsEHKmyCS9Wo"
+SECRET_KEY = config('SECRET_KEY')
+API_KEY= config('GCP_API_KEY', default='None')
 API_SERVICE_NAME= "cloudbilling"
 API_VERSION= 'v1'
 
@@ -59,4 +53,3 @@ def get_gcp_info(product):
     return info
 
 
-print(get_gcp_info('Anthos'))
