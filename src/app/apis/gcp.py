@@ -7,7 +7,6 @@ import requests
 import jellyfish
 from decouple import config
 
-SECRET_KEY = config('SECRET_KEY')
 API_KEY= config('GCP_API_KEY', default='None')
 API_SERVICE_NAME= "cloudbilling"
 API_VERSION= 'v1'

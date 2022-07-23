@@ -5,6 +5,7 @@ import sys
 import os
 import pandas as pd
 
+
 # Flask modules
 from flask               import jsonify, render_template, request, url_for, redirect, send_from_directory, flash
 from requests import session
@@ -165,6 +166,7 @@ def reports():
         return redirect(url_for('login'))
     return render_template('reports.html')
 
-@app.route('/more_info.html')
+@app.route('/more_info.html', methods=['GET', 'POST'])
 def more_info():
-    return render_template('more_info.html')
+    if request.method== 'POST': return redirect(url_for('more_info'))
+    else: return render_template('more_info.html')
