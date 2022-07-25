@@ -40,10 +40,17 @@ def get_aws_info(product, region=None):
     usageType= d['product']['attributes']['usagetype']
     serviceRegions= d['product']['attributes']['location']
     skuId= d['product']['sku']
+    serviceDescription= d.get('product', {}).get('attributes', {}).get('computeType')
+    resourceFamily= d.get('product', {}).get('productFamily')
 
     key1= list(d['terms']['OnDemand'].keys())[0]    #some keys are not consistent accross all products
     key2= list(d['terms']['OnDemand'][key1]['priceDimensions'].keys())[0]   #key1 and key2 gets them
+    startUsageAmount= d['terms']['OnDemand'][key1]['priceDimensions'][key2]['beginRange']
     priceDescription= d['terms']['OnDemand'][key1]['priceDimensions'][key2]['description']  #apply keys
 
-    info= {'Name': displayName,'Usage Type': usageType, 'Service Regions': serviceRegions, 'SKU ID': skuId, 'Price Description': priceDescription}
+    info= {'Name': displayName,'Service Description': serviceDescription,
+           'Service Regions': serviceRegions,'Resource Family': resourceFamily,
+           'Usage Type': usageType,'SKU ID': skuId,
+           'Start Usage Amount': startUsageAmount, 'Price Description': priceDescription}
     return info
+

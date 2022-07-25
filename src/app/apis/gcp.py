@@ -33,6 +33,7 @@ def get_gcp_info(product):
     r = requests.get(url = URL)
     data = r.json()
 
+
     #process data
     displayName= data['skus'][0]['category']['serviceDisplayName']
     usageType= data['skus'][0]['category']['usageType']
@@ -45,10 +46,17 @@ def get_gcp_info(product):
     currency= data['skus'][0]['pricingInfo'][0]['pricingExpression']['tieredRates'][0]['unitPrice']['currencyCode']
     usageUnitDescription= data['skus'][0]['pricingInfo'][0]['pricingExpression']['usageUnitDescription']
     displayQuantity= data['skus'][0]['pricingInfo'][0]['pricingExpression']['displayQuantity']
+    serviceDescription=data['skus'][0]['description']
+    resourceFamily=data['skus'][0]['category']['resourceFamily']
     unitPrice= (int(nanos)/1000000000) + int(units)
     priceDescription= f"{unitPrice * int(displayQuantity)} {currency} per {displayQuantity} {usageUnitDescription}"
 
-    info= {'Name': displayName,'Usage Type': usageType, 'Service Regions': serviceRegions, 'SKU ID': skuId, 'Price Description': priceDescription}
+    info= {'Name': displayName,'Service Description': serviceDescription,
+           'Service Regions': serviceRegions,'Resource Family': resourceFamily,
+           'Usage Type': usageType,'SKU ID': skuId,
+           'Start Usage Amount': startUsageAmount, 'Price Description': priceDescription}
     return info
+
+
 
 

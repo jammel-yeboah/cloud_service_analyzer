@@ -28,6 +28,15 @@
     {{ wtf.form_field(form.category, placeholder='Service Category') }}
     {{ wtf.form_field(form.type, placeholder='Service Type') }}
     {{ wtf.form_field(form.region, placeholder='Service Region') }}
+    {{ wtf.form_field(form.instances, placeholder='Number of Instances') }}
+    {{ wtf.form_field(form.machineFamily, placeholder='Machine family') }}
+    {{ wtf.form_field(form.infrastructureType, placeholder='Infrastructure Type') }}
+    {{ form.recaptcha }}
+    {% for error in form.recaptcha.errors %}
+    <ul>
+      <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+    </ul>
     <input class="btn btn-info" type="submit">
   </form>
 </div>

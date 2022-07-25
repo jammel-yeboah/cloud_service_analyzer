@@ -1,6 +1,7 @@
 
 # Python modules
 import os, logging
+from ossaudiodev import SNDCTL_DSP_BIND_CHANNEL
 import sys
 import os
 import pandas as pd
@@ -17,7 +18,7 @@ from flask_bootstrap     import Bootstrap
 
 # App modules
 from app        import app, lm, db, bc
-from app.models import Users
+from app.models import Users, Reports
 from app.forms  import LoginForm, RegisterForm, cloudForm
 from app.apis import gcp, aws, azure, cloud_map
 
@@ -133,6 +134,20 @@ def cloud_form():
         form.type.choices= filter.get_service_type()
         return render_template('cloud_form.html', form=form)
     else:
+        if current_user.is_authenticated:
+            user= current_user.id
+            report= Reports(
+                user_id= user,
+                serviceCategory= form.category.data,
+                serviceType=form.type.data,
+                serviceRegion=form.region.data,
+                instances=form.instances.data,
+                machineFamily=form.machineFamily.data,
+                infrastructureType=form.infrastructureType.data)
+
+            db.session.add(report) #add report to database
+            db.session.commit()
+
         session['cloud_form_data']= {'category':form.category.data,'type': form.type.data,'region': form.region.data}
         return redirect(url_for('display_results'))
 
@@ -158,15 +173,50 @@ def display_results():
     gcp_res= gcp.get_gcp_info(products['gcp'])
     aws_res= aws.get_aws_info(products['aws'], region)
     azure_res= azure.get_azure_info(products['azure'], region, form_data['category']) #azure uses identical category namings so adding category will make api query faster
-    return render_template('display_results.html', gcp_res=gcp_res, aws_res=aws_res, azure_res=azure_res)
+    results={}
+    #dictionary where keys are labels and values are lists of info by gc,aws,azure
+    for key in gcp_res: results[key]= [gcp_res[key], aws_res[key], azure_res[key]] #all dict keys are the same
+    print(results)
+    return render_template('display_results.html', results=results)
 
 @app.route('/reports.html')
 def reports():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    return render_template('reports.html')
+    userReports= Reports.query.filter_by(user_id= current_user.id).all()
+    return render_template('reports.html', userReports=userReports)
 
 @app.route('/more_info.html', methods=['GET', 'POST'])
 def more_info():
     if request.method== 'POST': return redirect(url_for('more_info'))
     else: return render_template('more_info.html')
+
+
+@app.route('/viewReport/<int:reportId>', methods=['POST'])
+def viewReport(reportId):
+    if request.method== "POST":
+        report= Reports.query.get_or_404(reportId)
+        filter= cloud_map.filter_options()
+        products= filter.get_products(report.serviceCategory, report.serviceType)
+        gcp_res= gcp.get_gcp_info(products['gcp'])
+        aws_res= aws.get_aws_info(products['aws'], report.serviceRegion)
+        azure_res= azure.get_azure_info(products['azure'], report.serviceRegion, report.serviceCategory) #azure uses identical category namings so adding category will make api query faster
+        results={}
+        #dictionary where keys are labels and values are lists of info by gc,aws,azure
+        for key in gcp_res: results[key]= [gcp_res[key], aws_res[key], azure_res[key]] #all dict keys are the same
+        return render_template('display_results.html', results=results)
+    else: return redirect(url_for('reports'))
+
+
+@app.route('/deleteReport/<reportId>', methods=['GET', 'POST'])
+def deleteReport(reportId):
+    if request.method== "POST":
+        report_to_del= Reports.query.get_or_404(reportId)
+        try:
+            db.session.delete(report_to_del)
+            db.session.commit()
+            return redirect(url_for('reports'))
+        except:
+            flash("There was a problem deleting report. Please try again.")
+            return redirect(url_for('reports'))
+    else: redirect(url_for('reports'))

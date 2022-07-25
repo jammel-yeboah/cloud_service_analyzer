@@ -3,7 +3,7 @@
 from random import choices
 from flask_wtf          import FlaskForm, RecaptchaField
 from flask_wtf.file     import FileField, FileRequired
-from wtforms            import StringField, TextAreaField, SubmitField, PasswordField, SelectField
+from wtforms            import StringField, TextAreaField, SubmitField, PasswordField, SelectField, IntegerField, BooleanField
 from wtforms.validators import InputRequired, Email, DataRequired
 
 class LoginForm(FlaskForm):
@@ -95,4 +95,11 @@ class cloudForm(FlaskForm):
 						("ukwest","(Europe) UK West"),
 						("uaecentral","(Middle East) UAE Central"),
 						("brazilsoutheast","(South America) Brazil Southeast")])
-    #recaptcha = RecaptchaField()
+    instances=IntegerField('Number of Instances', default=0)
+    machineFamily=SelectField('Machine Family', choices=[
+        									('General purpose', 'General purpose'),
+                                            ('Compute-optimized', 'Compute-optimized'),
+                                            ('Memory-optimized', 'Memory-optimized'),
+                                            ('Accelerator-optimized', 'Accelerator-optimized')])
+    infrastructureType= BooleanField('For Commercial Use', default='checked')
+    recaptcha = RecaptchaField()

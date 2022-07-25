@@ -27,36 +27,14 @@
     </tr>
   </thead>
   <tbody>
+    {% for key, value in results.items() %}
     <tr>
-      <th scope="col">Name</th>
-      <td>{{ gcp_res['Name'] if gcp_res is not none else 'No Results' }}</td>
-      <td>{{ aws_res['Name'] if aws_res is not none else 'No Results' }}</td>
-      <td>{{ azure_res['Name'] if azure_res is not none else 'No Results'}}</td>
+      <th scope="col">{{ key }}</th>
+      {% for item in value %}
+        <td>{{ item }}</td>
+      {% endfor %}
     </tr>
-    <tr>
-      <th scope="col">Usage Type</th>
-      <td>{{ gcp_res['Usage Type'] if gcp_res is not none else 'No Results' }}</td>
-      <td>{{ aws_res['Usage Type'] if aws_res is not none else 'No Results' }}</td>
-      <td>{{ azure_res['Usage Type'] if azure_res is not none else 'No Results' }}</td>
-    </tr>
-    <tr>
-      <th scope="col">Service Regions</th>
-      <td>{{ gcp_res['Service Regions'] if gcp_res is not none else 'No Results' }}</td>
-      <td>{{ aws_res['Service Regions'] if aws_res is not none else 'No Results' }}</td>
-      <td>{{ azure_res['Service Regions'] if azure_res is not none else 'No Results' }}</td>
-    </tr>
-    <tr>
-      <th scope="col">SKU ID</th>
-      <td>{{ gcp_res['SKU ID'] if gcp_res is not none else 'No Results' }}</td>
-      <td>{{ aws_res['SKU ID'] if aws_res is not none else 'No Results' }}</td>
-      <td>{{ azure_res['SKU ID'] if azure_res is not none else 'No Results' }}</td>
-    </tr>
-    <tr>
-      <th scope="col">Price Description</th>
-      <td>{{ gcp_res['Price Description'] if gcp_res is not none else 'No Results' }}</td>
-      <td>{{ aws_res['Price Description'] if aws_res is not none else 'No Results' }}</td>
-      <td>{{ azure_res['Price Description'] if azure_res is not none else 'No Results' }}</td>
-    </tr>
+    {% endfor %}
     </tbody>
 </table>
 </div>

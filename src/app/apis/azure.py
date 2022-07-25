@@ -7,10 +7,10 @@ import jellyfish
 def get_azure_info(product, region, category):
     data= find_product(product, region, category)
     if data== None: return None
-    info= {'Name': data['productName'],
-           'Usage Type': data['skuName'],
-           'Service Regions': data['location'],
-           'SKU ID': data['skuId'],
+    info= {'Name': data['productName'], 'Service Description': None,
+           'Service Regions': data['location'], 'Resource Family': data['serviceFamily'],
+           'Usage Type': data['skuName'], 'SKU ID': data['skuId'],
+           'Start Usage Amount': data['tierMinimumUnits'],
            'Price Description': f"{data['retailPrice']} USD per {data['unitOfMeasure']}"}
     return info
 
