@@ -1,0 +1,73 @@
+{% extends 'layouts/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} About US {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} about-us {% endblock body_class %}
+
+{% block content %}
+  {% if current_user.is_authenticated %}
+    {% include "includes/navigation-authenticated.html" %}
+  {% else %}
+    {% include "includes/navigation-not-authenticated.html" %}
+  {% endif %}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for msg in messages %}
+        <p>{{ msg }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+<div id="cloud_form_page">
+<div class="container" id="cloud_form">
+  <form method= "POST">
+    {{ form.csrf_token }}
+    {{ wtf.form_field(form.category, placeholder='Service Category') }}
+    {{ wtf.form_field(form.type, placeholder='Service Type') }}
+    {{ wtf.form_field(form.region, placeholder='Service Region') }}
+    {{ wtf.form_field(form.instances, placeholder='Number of Instances') }}
+    {{ wtf.form_field(form.machineFamily, placeholder='Machine family') }}
+    {{ wtf.form_field(form.infrastructureType, placeholder='Infrastructure Type') }}
+    {{ form.recaptcha }}
+    {% for error in form.recaptcha.errors %}
+    <ul>
+      <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+    </ul>
+    <input class="btn btn-info" type="submit">
+  </form>
+</div>
+</div>
+{% endblock content %}
+
+
+
+{% block javascripts %}
+<script>
+  let category_select= document.getElementById('category');
+  let type_select= document.getElementById('type')
+
+  category_select.onchange= function() {
+    category= category_select.value;
+
+    fetch('/service_types/' + category).then(function(response) {
+      response.json().then(function(data) {
+        let optionHTML= "";
+        for (let type of data.service_types) {
+          optionHTML += '<option value="' + type.id + '">' + type.name + '</option>';
+        }
+        type_select.innerHTML= optionHTML;
+      });
+    });
+  }
+</script>
+{% endblock javascripts %}
+
+
+{{ form.csrf_token }}
+    {{ form.category }}
+    {{ form.type }}
+    {{ form.region }}

@@ -1,0 +1,117 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} About US {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block body_class %} about-us {% endblock body_class %}
+
+{% block content %}
+  {% if current_user.is_authenticated %}
+    {% include "includes/navigation-authenticated.html" %}
+  {% else %}
+    {% include "includes/navigation-not-authenticated.html" %}
+  {% endif %}
+
+<!--Section: FAQ-->
+<div class= "bg-gradient-dark">
+<section id="faq">
+    <h3 class="text-center mb-4 pb-2 text-gradient text-info fw-bold">FAQ</h3>
+    <p class="text-center mb-5 text-white">
+      Find the answers for the most frequently asked questions below
+    </p>
+  
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <h6 class="mb-3 text-gradient text-info"><i class="fas fa-user text-gradient text-info pe-2"></i> How much does it cost to use Cloud Pricing Analyzer?
+        </h6>
+        <p class="text-white">
+          Nothing, it is absolutely <strong><u>FREE!</u></strong> You can get a report right now free of charge. If you choose, you create a free account as well
+          to save your reports
+        </p>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <h6 class="mb-3 text-gradient text-info"><i class="fas fa-pen-alt text-gradient text-info pe-2"></i> How do I use Cloud Pricing Analyzer? </h6>
+        <p class="text-white">
+          To get started, simply click <a href="cloud_form.html">here</a> and follow the prompts to fill out the form.
+          We will search through over 100,000 different services from major cloud providers and find you the best deal
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <h6 class="mb-3 text-gradient text-info"><i class="fas fa-rocket text-gradient text-info pe-2"></i> Do you offer one on one consultation?
+        </h6>
+        <p class="text-white">
+          At the moment no, but that is a plan we have in mind! However, for issues regarding our current services, please don't hesitate to contact us by filling out the contact form below
+        </p>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <h6 class="mb-3 text-gradient text-info"><i class="fas fa-book-open text-gradient text-info pe-2"></i> Are more functionalities coming
+        to Cloud Pricing Analyzer? </h6>
+        <p class="text-white">
+          Yes! We are in the works of creating an in depth optimizer for customers who wish to find alternatives or improvements to their
+          current cloud infrastructure
+        </p>
+      </div>
+    </div>
+  </section>
+  <!--Section: FAQ-->
+
+
+  <section id= "contact-form-info">
+    <div class="container py-4">
+      <div class="row">
+        <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+          <div class="card d-flex justify-content-center p-4 shadow-lg">
+            <div class="text-center">
+              <h3 class="text-gradient text-info">Contact us</h3>
+              <p class="mb-0">
+                For further questions, including partnership opportunities, please email jammelyeboah@gmail.com
+                or contact using our contact form.
+              </p>
+            </div>
+            <div class="card card-plain">
+              <form role="form" id="contact-form" method="post" action="/more_info.html" autocomplete="off">
+                <div class="card-body pb-2">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Full Name</label>
+                      <div class="input-group mb-4">
+                        <input name="name" class="form-control" placeholder="Full Name" aria-label="Full Name" type="text" >
+                      </div>
+                    </div>
+                    <div class="col-md-6 ps-md-2">
+                      <label>Email</label>
+                      <div class="input-group">
+                        <input name="email" type="email" class="form-control" placeholder="hello@domain.com" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-0 mt-md-0 mt-4">
+                    <label>How can we help you?</label>
+                    <textarea name="message" class="form-control" id="message" rows="6" placeholder="Describe your problem in at least 150 characters"></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 text-center">
+                      <button type="submit" class="btn bg-gradient-info mt-3 mb-0">Send Message</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content %}

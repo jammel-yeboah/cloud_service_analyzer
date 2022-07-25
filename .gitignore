@@ -1,0 +1,16 @@
+### Flask.Python Stack ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+src/static/sitemap.xml
+src/static/favicon.ico
+src/app/apis/auth/cp-calc-1-json-key.json
+src/app/apis/installation_log.txt
+how_to_run.txt
+bin
+flask
+lib
+include
+src/app/apis/cp-calc-1-json-key.json
+*.env
