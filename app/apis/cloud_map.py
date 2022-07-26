@@ -5,7 +5,8 @@ import os
 
 class filter_options:
     def __init__(self):
-        self.df= pd.read_excel(os.path.basename("/apis/cmap_sheet.xlsx"), "Sheet1")
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        self.df= pd.read_excel(f'{basedir}/cmap_sheet.xlsx', 'Sheet1')
 
     def get_categories(self): #returns a list of cloud categories to be listed on select menu on forms page
         items= self.df['Service_category'].unique()
@@ -26,5 +27,4 @@ class filter_options:
                     'aws': res['aws_offering'][0].split(',')[0],
                     'azure': res['azure_offering'][0].split(',')[0]}
         return products
-
 
