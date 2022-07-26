@@ -4,7 +4,7 @@ import numpy as np
 
 class filter_options:
     def __init__(self):
-        self.df= pd.read_excel("apis/cmap_sheet.xlsx", "Sheet1")
+        self.df= pd.read_excel("cmap_sheet.xlsx", "Sheet1")
 
     def get_categories(self): #returns a list of cloud categories to be listed on select menu on forms page
         items= self.df['Service_category'].unique()
