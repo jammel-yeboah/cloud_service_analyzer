@@ -68,7 +68,7 @@ def register():
 
         else:
 
-            pw_hash = bc.generate_password_hash(password)
+            pw_hash = bc.generate_password_hash(password).decode('utf-8')
 
             user = Users(username, email, pw_hash)
 
