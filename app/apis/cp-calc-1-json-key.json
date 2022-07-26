@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "cp-calc-1",
+  "private_key_id": "f178358adea65e8af93e62632f2c83bf62c1a103",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCc/EzrACP5XcaW\nv80E7NB0VFuxJy6zuuIreHdr0avgJzK2HflBzSEltKLLc/Z1th7bkKLwPiWHuN/t\n0B6aL8dRxtJDP2LoUc4BzHpPAHc5bOtmxqPayf0Ef5deWJZ326ZEtz4vAi58Tk6q\n+y+OyitmdAOfGFq0FfMLhkFLqCLrC94mEkbCchIXTXjlB94cex0adCHOfMj1eJg2\nfOOPNOgOCLWV1fzHq5qBAw8VsN7pr05PW4zIhtYPByUSmhzfTu64Vff1YwVE1BuO\nckxG3uEnQ0edXrGyejt+oNiXNKuI/IcUAnl3d14oquXBO4F0tvIt7DwytDvvDpcU\nAZtx+ILlAgMBAAECggEAAYeJvk5hi1fpC+XxeudNvpxlykuN7m1XL8I8M5421Pe8\nzD5tg8EaXhIs9dt63rm4Aj6d/8YzOmfIMrpw2eK2R+sueD5BWe8WGTljRarE/pe7\nkWRFC2glYWpW0LH/QUqwC4JXhkC4sDhZFtxcocEBfD2MHXwwwglmtUmJEFIiiPSw\nO7AIwtQ541qmcctE6DwAOUZ5JOHqLm87X3DHBy1bJaFQbXVeO8CGQv6EwTEzBG1p\n1fuQLzXqcqQKWLReW9+lEXPUlFEQJSzI0sUA2nJz9/RSeCgICfaAJ+bFNOEqN4wb\n0FBrNhalDjpbLs9DsvQ2lTubCDyCouOnNa07IrLqcQKBgQDSgHfRXmi6xtB6lopp\nk8S3BxWbMiW6fLbC61d7/fiGlS1pW1izTISzzduN/tW+pIYu4c03rdpXZcDkhzB2\nRbLaI38IJIBmCxDUs2cUWIOWH0pI1AGrRLNf8h+BV4PT7J9dR3ZmoLFv2nnh7hHO\nQRpaNAZdOXppkz8fneA6wGv0XQKBgQC+6qiDE9qLZ4blq9LGUwYAhvYdBVzYNG6D\n1Wj5umDvz6z3Uga7gA9w0Ol1k/e1kcSU8egTcNXtsubVZTy4WEFKeAM6VPARmTby\n1k1TA68fkPo6iQMi5demQ10DMRunabcHjLRbm0qVjF9b9xFwjtxUCdwkZkOyH42s\nQNRFqIHgKQKBgFqg5PVHaF/B6VBeMAl0jWUfr7W5yXSY7TbOjEPd/Ho1D/AkW/QW\nJawkHTrtVKlXvE3C+c/XEgI+1OWPLtY8+9vfHHos/PryGLT66I5h7YVcw2bHoFBU\nq8XLQLU3MJK1dYd7lQZqePpnXcJf9VqPvQDJFVRdws5hjvPVzQx+e/whAoGAHYt2\n9IH4CibFS3mhrqtefGpmX+taiOLkT2aRTkQ3iCUdYVDCVfXlbdIGrvltFh4uy9X7\n0jZeBODwtAlssiKGSB32cep/FFoflMjxQm2JhlsLPk/Bun7TNpmqJTpOS0Qi3Po7\nVwnbKvWENFkxy7dwBVlZRhDFXSVg6U1HDFidcLECgYEA0cY+wd4E85Krhe5M/ACu\nomzOPEPbiN8aLL2BWWGt9JIy/McEnqJB0s7WSbnUwoSsEoN7AboNStH9UbYU48wo\n/N1eydeq+3MNcw413GMS3FN+dh3FxtpVW7qmemgzTVNEiYtwT0ofKBROm82gCN9N\ncugYPqG9991XCApA4yTFJTk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "jammel-cloud-adm@cp-calc-1.iam.gserviceaccount.com",
+  "client_id": "101245433169078334271",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jammel-cloud-adm%40cp-calc-1.iam.gserviceaccount.com"
+}
